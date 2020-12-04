@@ -71,8 +71,7 @@ def map_to_passport(m: Map[String, String]) = {
 
 def make_passport(line: String): Passport = {
 
-  // immutable maps
-  var observed_fields: Map[String, String] = line
+  val observed_fields: Map[String, String] = line
     .replace("\n", " ")
     .split("\\s+")
     .map(a => a.split(":"))
@@ -146,6 +145,7 @@ def valid_hair(field: Option[String], hair_regex_check: Regex) = field match {
   }
 }
 
+// Didn't use x.contains(y) just in case "exactly one of" was a gotcha
 def valid_eyes(field: Option[String], eye_check: List[String]) = field match {
   case None => false
   case Some(field) => if (eye_check.filter(_ == field).length == 1) true else false
